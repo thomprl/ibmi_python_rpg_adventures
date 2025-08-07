@@ -1,2 +1,2 @@
 # ibmi_python_rpg_adventures
-Some sample code for IBMi, Python and RPG 
+A series of articles on the IBMi, Python and RPG
