@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.datatables.net/v/dt/dt-2.3.2/datatables.min.css" rel="stylesheet"
+        integrity="sha384-d76uxpdVr9QyCSR9vVSYdOAZeRzNUN8A4JVqUHBVXyGxZ+oOfrZVHC/1Y58mhyNg" crossorigin="anonymous">
+    <script src="https://cdn.datatables.net/v/dt/dt-2.3.2/datatables.min.js"
+        integrity="sha384-JRUjeYWWUGO171YFugrU0ksSC6CaWnl4XzwP6mNjnnDh4hfFGRyYbEXwryGwLsEp"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="javascript/common.js"></script>
+</head>
+
+<body>
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeProductModal()">&times;</span>
+            <h2 id="modalTitle">Edit Product</h2>
+            <form id="productForm">
+                <label for="modalProductNumber">Product Number:</label>
+                <input type="text" id="modalProductNumber" name="ProductNumber" readonly
+                    style="background:#eee;"><br><br>
+                <label for="modalDescription">Description:</label>
+                <input type="text" id="modalDescription" name="Description"><br><br>
+                <label for="modalCost">Cost:</label>
+                <input type="number" id="modalCost" name="Cost" min=0 required value="0" step="0.01"><br><br>
+                <label for="modalUOM">UOM:</label>
+                <input type="text" id="modalUOM" name="UnitOfMeasure"><br><br>
+                <label for="modalCategory">Category:</label>
+                <input type="text" id="modalCategory" name="Category"><br><br>
+                <button type="button" onclick="submitProductForm()">Submit</button>
+                <button type="button" onclick="closeProductModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="/">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">Tools
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="/api?app=product&action=getproductlist">Get Raw JSON Product List</a>
+                <a href="/api?action=shutdown">Shutdown Web Server</a>
+            </div>
+        </div>
+        <a href="#" onclick="addNewProduct()">Add New Product</a>
+    </div>
+
+    <br><br>
+
+    <div id="notification" style="display:none;">
+
+        <span id="notification-message"></span>
+        <button onclick="hideNotification()" style="float:right;">&times;</button>
+    </div>
+    <br>
+    <div>
+        <table id="myTable" class="display table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Product Number</th>
+                    <th>Description</th>
+                    <th>Cost</th>
+                    <th>UOM</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+
+</html>
